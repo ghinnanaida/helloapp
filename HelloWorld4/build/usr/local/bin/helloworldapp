@@ -1,2 +1,0 @@
-#!/bin/sh
-exec /usr/local/lib/helloworldapp/HelloWorld4 "$@"

@@ -1,7 +1,0 @@
-#!/bin/sh
-set -e
-
-systemctl stop helloworldapp.service || true
-systemctl disable helloworldapp.service || true
-
-exit 0

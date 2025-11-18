@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent none
 
   environment {
     APP = "HelloWorld4"
@@ -15,37 +15,23 @@ pipeline {
       steps { checkout scm }
     }
 
-    stage('Build .deb') {
-      steps {
-        sh """
-          chmod +x jenkins/build-deb.sh
-          APP=${APP} APP_DIR=${APP_DIR} VER=${VERSION} RID=${RID} ARCH=${ARCH} OUTDIR=${OUTDIR} \
-            ./jenkins/build-deb.sh
-        """
-      }
-      post {
-        success {
-          archiveArtifacts artifacts: "${OUTDIR}/*.deb", fingerprint: true
+    stage('Build using Dockerfile') {
+            agent {
+                dockerfile {
+                    filename 'dockerfile'
+                    dir 'jenkins'
+                }
+            }
+            steps {
+                sh 'echo Build inside docker...'
+            }
         }
-      }
-    }
-
-    // stage('Publish to HTTP repo (optional)') {
-    //   when { expression { return fileExists('/var/www/html/repo') } } // only if you have a repo folder
-    //   steps {
-    //     sh """
-    //       sudo mkdir -p /var/www/html/repo
-    //       sudo cp ${OUTDIR}/${APP}_${VERSION}_${ARCH}.deb /var/www/html/repo/
-    //       sudo chown www-data:www-data /var/www/html/repo/${APP}_${VERSION}_${ARCH}.deb || true
-    //       # optional: keep a stable latest name
-    //       sudo cp /var/www/html/repo/${APP}_${VERSION}_${ARCH}.deb /var/www/html/repo/${APP}_latest_${ARCH}.deb
-    //     """
-    //   }
-    // }
   }
 
   post {
-    success { echo "Build ${APP}_${VERSION}_${ARCH}.deb completed" }
+    success { 
+        echo "Build ${APP}_${VERSION}_${ARCH}.deb completed" 
+        archiveArtifacts artifacts: '**/*.deb'}
     failure { echo "Build failed" }
   }
 }
