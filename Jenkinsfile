@@ -4,7 +4,7 @@ pipeline {
   environment {
     APP = "HelloWorld4"
     APP_DIR = "helloworldapp"
-    VERSION = "1.0.0"
+    VERSION = "1.0.1"
     RID = "linux-x64"     // change to linux-arm64 for Pi job/branch
     ARCH = "amd64"        // change to arm64 for raspi 
     OUTDIR = "out"
@@ -16,14 +16,13 @@ pipeline {
     }
 
     stage('Build using Dockerfile') {
-            agent {
-                dockerfile {
-                    filename 'dockerfile'
-                    dir '.'
-                }
-            }
             steps {
-                sh 'echo Build inside docker...'
+                sh '''
+                docker build -t helloapp-builder .
+                docker run --name builder-container helloapp-builder
+                docker cp builder-container:/app/out ./out
+                docker rm builder-container
+                '''
             }
         }
   }
