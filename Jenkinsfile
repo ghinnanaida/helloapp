@@ -8,7 +8,7 @@ pipeline {
 
     stage('Build using Dockerfile') {
             steps {
-                sh '''
+                sh ''' 
                 docker build -t helloapp-builder .
                 docker run --name builder-container helloapp-builder
                 docker cp builder-container:/app/out ./out
