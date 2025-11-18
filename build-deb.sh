@@ -4,9 +4,9 @@ set -euo pipefail
 # Config (override with env vars from Jenkins if you want)
 APP="${APP:-HelloWorld4}"            # package name (Package: value)
 APP_DIR="${APP_DIR:-helloworldapp}"  # folder under /usr/local/lib/<APP_DIR>
-VER="${VER:-1.0.0}"
-RID="${RID:-linux-x64}"              # linux-arm64 for Raspberry Pi
-ARCH="${ARCH:-amd64}"                # arm64 for Raspberry Pi
+VER="${VER:-1.0.1}"
+RID="${RID:-linux-arm64}"              # linux-arm64 for Raspberry Pi or linux-x64 for other
+ARCH="${ARCH:-arm64}"                # arm64 for Raspberry Pi or amd64 for other
 OUTDIR="${OUTDIR:-out}"
 BUILD_DIR="./build"
 

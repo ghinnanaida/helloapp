@@ -1,7 +1,7 @@
 Package: HelloWorld4
-Version: 1.0.0
+Version: 1.0.1
 Section: utils
 Priority: optional
-Architecture: amd64
+Architecture: arm64
 Maintainer: Ghinna <ghinna.aprianto@formulatrix.com>
 Description: .NET Web API test
