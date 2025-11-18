@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Correct permissions
+chown -R helloworldapp:helloworldapp /usr/local/lib/helloworldapp
+
+systemctl daemon-reload
+systemctl enable helloworldapp.service
+systemctl restart helloworldapp.service
+
+exit 0

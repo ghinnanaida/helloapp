@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+    rm -rf /usr/local/lib/helloworldapp
+    rm -f /usr/local/bin/helloworldapp
+    deluser helloworldapp 2>/dev/null || true
+    delgroup helloworldapp 2>/dev/null || true
+fi
+
+exit 0
