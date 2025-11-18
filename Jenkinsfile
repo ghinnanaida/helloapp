@@ -6,7 +6,7 @@ pipeline {
     APP_DIR = "helloworldapp"
     VERSION = "1.0.0"
     RID = "linux-x64"     // change to linux-arm64 for Pi job/branch
-    ARCH = "amd64"        // change to arm64 for Pi
+    ARCH = "amd64"        // change to arm64 for raspi
     OUTDIR = "out"
   }
 
