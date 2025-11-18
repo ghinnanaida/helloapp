@@ -7,9 +7,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY HelloWorld4/ ./
+
+COPY . .
 
 
 # Build .deb using your script
-RUN chmod +x build-deb.sh && \
-    ./build-deb.sh out
+RUN chmod +x build-deb.sh 
+RUN ./build-deb.sh
